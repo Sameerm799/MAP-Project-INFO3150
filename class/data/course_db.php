@@ -23,3 +23,18 @@ function get_course($course_id){
 	$statement->closeCursor();
 	return $course;
 }
+
+function add_course($year_id, $number, $name, $semester){
+	global $db; 
+	$query = 'INSERT INTO courses
+				(yearID, courseNumber, courseName, semester)
+			  VALUES
+				(:year_id, :number, :name, :semester)';
+	$statement = $db->prepare($query); 
+	$statement->bindValue(':year_id', $year_id);
+	$statement->bindValue(':number', $number);
+	$statement->bindValue(':name', $name); 
+	$statement->bindValue(':semester', $semester); 
+	$statement->execute(); 
+	$statement->closeCursor();
+}
