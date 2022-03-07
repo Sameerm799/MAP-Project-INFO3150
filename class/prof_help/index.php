@@ -29,15 +29,16 @@ if($action == 'list_courses'){
 }else if($action == 'add_course'){
 	$year_id = filter_input(INPUT_POST, 'year_id', 
 			FILTER_VALIDATE_INT);
+	$course_id = filter_iNPUT(INPUT_POST, 'id');
 	$number = filter_input(INPUT_POST, 'number');
 	$name = filter_input(INPUT_POST, 'name'); 
 	$semester = filter_input(INPUT_POST, 'semester');
-	if ($year_id == NULL || $year_id == FALSE || $number == NULL || $name == NULL ||
+	if ($year_id == NULL || $year_id == FALSE || $course_id == NULL || $number == NULL || $name == NULL ||
 			$semester == NULL){
 				$error = "Invalid course data. Check all fields and try again."; 
 				include('../errors/error.php'); 
 			}else {
-				add_course($year_id, $number, $name, $semester);
+				add_course($course_id, $year_id, $number, $name, $semester);
 				header("Location: .?year_id=$year_id");
 			}
 }

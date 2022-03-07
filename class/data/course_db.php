@@ -24,13 +24,14 @@ function get_course($course_id){
 	return $course;
 }
 
-function add_course($year_id, $number, $name, $semester){
+function add_course($course_id, $year_id, $number, $name, $semester){
 	global $db; 
 	$query = 'INSERT INTO courses
-				(yearID, courseNumber, courseName, semester)
+				(courseID, yearID, courseNumber, courseName, semester)
 			  VALUES
-				(:year_id, :number, :name, :semester)';
+				(:course_id, :year_id, :number, :name, :semester)';
 	$statement = $db->prepare($query); 
+	$statement->bindValue(':course_id', $course_id);
 	$statement->bindValue(':year_id', $year_id);
 	$statement->bindValue(':number', $number);
 	$statement->bindValue(':name', $name); 
@@ -38,3 +39,4 @@ function add_course($year_id, $number, $name, $semester){
 	$statement->execute(); 
 	$statement->closeCursor();
 }
+

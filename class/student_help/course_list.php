@@ -14,20 +14,28 @@
 		</ul>
 		</nav>
 	</aside>
-	<section>
+	<form action="cart.php" method="post">
 		<h1><?php echo $year_name; ?></h1>
 		<nav>
 		<ul>
 			<?php foreach($courses as $course) : ?>
 			<li>
-				<a href="?action=view_course&amp;course_id=<?php
-						echo $course['courseID']; ?>">
-					<?php echo $course['courseName']; ?>
-				</a>
+					<?php echo $course['courseName'];?>
+					<ul>
+						<li>
+							<?php echo $course['courseNumber'];?>
+							<?php echo $course['semester'];?>
+							<input type="submit" value="Add Course">
+						</li>
+					</ul>
 			</li>
 			<?php endforeach; ?>
 		</ul>
 		</nav>
-	</section>
+	</form>
+	
+	
+		
 </main>
+
 <?php include '../view/footer.php'; ?>
