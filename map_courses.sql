@@ -9,12 +9,12 @@ CREATE TABLE years(
 );
 
 CREATE TABLE courses(
-	courseID		INT(11)			NOT NULL AUTO_INCREMENT, 
+	courseID		INT(11)			NOT NULL, 
 	yearID			INT(11)			NOT NULL, 
-	courseNumber 	INT(4) 	        NOT NULL UNIQUE, 
+	courseNumber 	INT(4) 	        NOT NULL, 
 	courseName		VARCHAR(255) 	NOT NULL, 
-	semester		VARCHAR(255)	NOT NULL,
-	PRIMARY KEY (courseID)
+	semester		VARCHAR(255)	NOT NULL
+	
 );
 
 INSERT INTO years VALUES
