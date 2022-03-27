@@ -3,6 +3,12 @@ require('../data/database.php');
 require('../data/year_db.php');
 require('../data/course_db.php');
 
+session_start();
+ 
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: ../index.php");
+    exit;
+}
 
 $action = filter_input(INPUT_POST, 'action');
 if($action == NULL){
@@ -13,30 +19,42 @@ if($action == NULL){
 }
 
 if($action == 'list_courses'){
-	$year_id = filter_input(INPUT_GET, 'year_id', 
+	$edu_id = filter_input(INPUT_GET, 'edu_id', 
 			FILTER_VALIDATE_INT);
-	if($year_id == NULL || $year_id == FALSE){
-		$category_id = 1;
+	if($edu_id == NULL || $edu_id == FALSE){
+		$edu_id = 1;
 	}
-	$years = get_years();
-	$year_name = get_year_name($year_id);
-	$courses = get_courses_by_year($year_id);
+	$edus = get_edus();
+	$edu_name = get_edu_name($edu_id);
+	$degreecourses = get_deg_courses_by_edu($edu_id);
+	$diplomacourses = get_dip_courses_by_edu($edu_id);
+	$electivecourses = get_electives_by_edu($edu_id);
 	include('course_list.php');
-}else if($action == 'view_course'){
-	$course_id = filter_input(INPUT_GET, 'course_id',
-			FILTER_VALIDATE_INT);
-	if($course_id == NULL || $course_id == FALSE){
-		$error = 'Missing or incorrect coures id.';
+	
+}else if($action == 'list_comments'){
+	$educomment_id = filter_input(INPUT_GET, 'edu_id', FILTER_VALIDATE_INT);
+	if($educomment_id == NULL || $edu_id == FALSE){
+	    $educomment_id=1;
+	}
+	$edus = get_edus();
+	$coursesIDs = get_courseid($educomment_id);
+	include('comments_list.php');
+
+}else if($action == 'show_comment_form'){
+	include('comments_add.php');
+	
+}else if($action == 'add_comment'){
+	$edu_id = filter_input(INPUT_POST, 'edu_id',
+		FILTER_VALIDATE_INT); 
+	$number = filter_INPUT(INPUT_POST, 'number');
+	$comment = filter_input(INPUT_POST, 'comment');
+	if($number == NULL || $comment == NULL){
+		$error = "Invalid comment data. Check all fields and try again.";
 		include('../errors/error.php');
 	}else{
-		$years = get_years();
-		$course = get_course($course_id);
-		
-		$number = $course['courseNumber'];
-		$name = $course['courseName'];
-		
-		
-		include('course_view.php');
+		$edu_id = 1; 
+		add_comment($edu_id, $number, $comment);
+		header("Location: .?edu_id=$edu_id");
 	}
 }
 

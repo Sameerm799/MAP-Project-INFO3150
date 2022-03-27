@@ -1,25 +1,25 @@
 <?php 
-function get_years(){
+function get_edus(){
 	global $db;
-	$query = 'SELECT * FROM years
-			  ORDER BY yearID';
+	$query = 'SELECT * FROM education
+			  ORDER BY eduID';
 	$statement = $db->prepare($query);
 	$statement->execute();
-	$years = $statement->fetchAll();
+	$edus = $statement->fetchAll();
 	$statement->closeCursor();
-	return $years;
+	return $edus;
 }
 
-function get_year_name($year_id){
+function get_edu_name($edu_id){
 	global $db;
-	$query = 'SELECT * FROM years
-			  WHERE yearID = :year_id';
+	$query = 'SELECT * FROM education
+			  WHERE eduID = :edu_id';
 	$statement = $db->prepare($query);
-	$statement->bindValue(':year_id', $year_id);
+	$statement->bindValue(':edu_id', $edu_id);
 	$statement->execute();
-	$year = $statement->fetch();
+	$edu = $statement->fetch();
 	$statement->closeCursor();
-	$year_name = $year['yearName'];
-	return $year_name;
+	$edu_name = $edu['eduName'];
+	return $edu_name;
 }
 ?>

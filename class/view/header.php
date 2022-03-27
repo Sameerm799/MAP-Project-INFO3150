@@ -3,7 +3,7 @@
 
 <head>
 	<title> MAP </title>
-	<!-- link css file -->
+	<link rel="stylesheet" type="text/css" href="/class/main.css">
 </head>
 
 <body>

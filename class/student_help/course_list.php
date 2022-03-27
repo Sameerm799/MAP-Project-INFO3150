@@ -1,41 +1,77 @@
 <?php include '../view/header.php'; ?>
+
+
+
+
 <main>
 	<aside>
-		<h1>Years</h1>
+		
 		<nav>
 		<ul>
-			<?php foreach($years as $year) : ?>
+			<?php foreach($edus as $edu) : ?>
 			<li>
-				<a href="?year_id=<?php echo $year['yearID'];?>">
-					<?php echo $year['yearName']; ?>
+				<a href="?edu_id=<?php echo $edu['eduID'];?>">
+					<?php echo $edu['eduName']; ?>
 				</a>
 			</li>
 			<?php endforeach; ?>
+			<li>Login</li>
+			<li><a href ="?action=list_comments">Comments</a></li>
+			<li>Offer Course</li>
 		</ul>
 		</nav>
 	</aside>
-	<form action="cart.php" method="post">
-		<h1><?php echo $year_name; ?></h1>
-		<nav>
-		<ul>
-			<?php foreach($courses as $course) : ?>
-			<li>
-					<?php echo $course['courseName'];?>
-					<ul>
-						<li>
-							<?php echo $course['courseNumber'];?>
-							<?php echo $course['semester'];?>
-							<input type="submit" value="Add Course">
-						</li>
-					</ul>
-			</li>
+	
+	<section>
+		<h2><?php echo $edu_name; ?></h2>
+		<table>	
+			<tr>
+				<th>Course Number</th>
+				<th>Course Name</th>
+				<th>Pre-requiste</th>
+				<th>Semester</th>
+				<th>Completed</th>
+				
+			</tr>
+			<?php foreach($degreecourses as $degreecourse) :?>
+			<tr>
+				<td><?php echo $degreecourse['courseID'];?> </td>
+				<td><?php echo $degreecourse['courseName'];?> </td>
+				<td><?php echo $degreecourse['prereqID']; ?> </td>
+				<td><?php echo $degreecourse['semester']; ?></td>
+			</tr>
 			<?php endforeach; ?>
-		</ul>
-		</nav>
-	</form>
-	
-	
+			
+			<?php foreach($diplomacourses as $diplomacourse) :?>
+			<tr>
+				<td><?php echo $diplomacourse['courseID'];?> </td>
+				<td><?php echo $diplomacourse['courseName'];?> </td>
+				<td><?php echo $diplomacourse['prereqID']; ?> </td>
+				<td><?php echo $diplomacourse['semester']; ?></td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
 		
+		<h2>Electives</h2>
+		<p>Electives not needed for Diploma Program</p>
+		<table>	
+			<tr>
+				<th>Course Number</th>
+				<th>Course Name</th>
+				<th>Pre-requiste</th>
+				<th>Semester</th>
+				<th>Completed</th>
+			</tr>
+			<?php foreach($electivecourses as $electivecourse) :?>
+			<tr>
+				<td><?php echo $electivecourse['courseID'];?> </td>
+				<td><?php echo $electivecourse['courseName'];?> </td>
+				<td><?php echo $electivecourse['prereqID']; ?> </td>
+				<td><?php echo $electivecourse['semester']; ?></td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
+	</section>
 </main>
 
 <?php include '../view/footer.php'; ?>
