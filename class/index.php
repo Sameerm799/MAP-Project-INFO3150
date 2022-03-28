@@ -2,13 +2,11 @@
 <?php
 session_start();
 
-if(isset($_SESSION["leggedin"]) && $_SESSION["loggedin"] === true){
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 	header("location:student_help/index.php");
 	exit;
 }
 require('data/database.php');
-require('data/year_db.php');
-require('data/course_db.php');
 
 $username = $password = "";
 $username_error = $password_error = $login_error = "";
@@ -39,11 +37,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			if($statement->execute()){
 				
 				if($statement->rowCount() == 1){
-					if($row  = $statement->fetch()){
-					$userID = $row["userID"];
-					$username = $row["username"]; 
-					$hashed_password = $row["password"];
-					if(password_verify($password, $hashed_password)){
+					if($row = $statement->fetch()){
+						$userID = $row["userID"];
+						$username = $row["username"]; 
+						$hashed_password = $row["password"];
+						if($password === $hashed_password){
 								session_start();
 								
 								$_SESSION["loggedin"] = true; 
@@ -51,14 +49,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 								$_SESSION["username"] = $username; 
 								
 								header("location:student_help/index.php");
-							}else{
-								$login_error = "Invalid username or password.";
-							}
-						 }
-			}else{
-							$login_error = "Invalid username or password.";
+						}else{
+								$login_error = "Password error.";
 						}
-		}else{
+					}
+				}else{
+							$login_error = "Username error.";
+						}
+			}else{
 					echo "check fetch results error ";
 				}
 						
@@ -69,20 +67,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			unset($db);
 }
 ?>
-<main>
-	<h1>Are you:</h1>
-	<ul>
-		<li>
-			<a href="student_help"> Student</a>
-		</li>
-		
-	</ul>
-</main>
+
 <body>
 	<h2>Login</h2>
 	<?php
 	if(!empty($login_error)){
-		echo 'Invalid' . $login_error;
+		echo $login_error;
 	}
 	?>
 	
@@ -91,11 +81,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		<input type="text" name="username" <?php echo (!empty($username_error)) ? 'is-invalid' : ''; ?> value="<?php echo $username; ?>">
 			<span><?php echo $username_error; ?>
 			</span>
-			
+		<br>
+		
 		<label>Password</label>
 		<input type="password" name="password" <?php echo (!empty($password_error)) ? 'is-invalid' : ''; ?>>
 		<span><?php echo $password_error;?>
 		</span>
+		<br>
 		
 		<input type="submit" value="Login">
 	</form>

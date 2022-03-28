@@ -1,9 +1,8 @@
 <?php include '../view/header.php'; ?>
 
-
-
-
 <main>
+	<p>User Logged In: <?php echo htmlspecialchars($_SESSION["username"]); ?> </p>
+	
 	<aside>
 		
 		<nav>
@@ -15,9 +14,9 @@
 				</a>
 			</li>
 			<?php endforeach; ?>
-			<li>Login</li>
 			<li><a href ="?action=list_comments">Comments</a></li>
 			<li>Offer Course</li>
+			<li><a href="logout.php">Logout</a>
 		</ul>
 		</nav>
 	</aside>
@@ -32,6 +31,7 @@
 				<th>Semester</th>
 				<th>Completed</th>
 				
+				
 			</tr>
 			<?php foreach($degreecourses as $degreecourse) :?>
 			<tr>
@@ -39,6 +39,7 @@
 				<td><?php echo $degreecourse['courseName'];?> </td>
 				<td><?php echo $degreecourse['prereqID']; ?> </td>
 				<td><?php echo $degreecourse['semester']; ?></td>
+				<td><?php echo $degreecourse['completed']; ?></td>
 			</tr>
 			<?php endforeach; ?>
 			
@@ -48,6 +49,7 @@
 				<td><?php echo $diplomacourse['courseName'];?> </td>
 				<td><?php echo $diplomacourse['prereqID']; ?> </td>
 				<td><?php echo $diplomacourse['semester']; ?></td>
+				<td><?php echo $diplomacourse['completed']; ?></td>
 			</tr>
 			<?php endforeach; ?>
 		</table>
@@ -68,6 +70,7 @@
 				<td><?php echo $electivecourse['courseName'];?> </td>
 				<td><?php echo $electivecourse['prereqID']; ?> </td>
 				<td><?php echo $electivecourse['semester']; ?></td>
+				<td><?php echo $electivecourse['completed']; ?></td>
 			</tr>
 			<?php endforeach; ?>
 		</table>

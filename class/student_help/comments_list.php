@@ -1,5 +1,6 @@
 <?php include '../view/header.php';?>
 <main>
+<p>User Logged In: <?php echo htmlspecialchars($_SESSION["username"]); ?> </p>
 	<nav>
 		<ul>
 			<?php foreach($edus as $edu) : ?>
@@ -9,9 +10,9 @@
 				</a>
 			</li>
 			<?php endforeach; ?>
-			<li>Login</li>
 			<li><a href ="?action=list_comments">Comments</a></li>
 			<li>Offer Course</li>
+			<li><a href="logout.php">Logout</a>
 		</ul>
 		</nav>
 	<h1>Comments</h1>
