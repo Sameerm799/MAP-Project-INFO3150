@@ -58,6 +58,17 @@ if($action == 'list_courses'){
 		add_comment($edu_id, $number, $comment);
 		header("Location: .?edu_id=$edu_id");
 	}
+}else if($action == 'list_offers'){
+	$edu_id = filter_input(INPUT_GET, 'edu_id', 
+			FILTER_VALIDATE_INT);
+	if($edu_id == NULL || $edu_id == FALSE){
+		$edu_id = 1;
+	}
+	$edus = get_edus();
+	$edu_name = get_edu_name($edu_id);
+	$degreeNcompleted = get_degree_Ncompleted($edu_id);
+	$diplomaNcompleted = get_diploma_Ncompleted($edu_id);
+	include('course_offer.php');
 }
 
 

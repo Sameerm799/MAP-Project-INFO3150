@@ -22,4 +22,6 @@ function get_edu_name($edu_id){
 	$edu_name = $edu['eduName'];
 	return $edu_name;
 }
+
+
 ?>

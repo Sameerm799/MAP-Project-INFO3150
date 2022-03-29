@@ -15,7 +15,7 @@
 			</li>
 			<?php endforeach; ?>
 			<li><a href ="?action=list_comments">Comments</a></li>
-			<li>Offer Course</li>
+			<li><a href ="?action=list_offers">Course Offer</a></li>
 			<li><a href="logout.php">Logout</a>
 		</ul>
 		</nav>

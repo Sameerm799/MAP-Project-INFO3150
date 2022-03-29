@@ -75,4 +75,31 @@ function add_comment($edu_id, $number, $comment){
 	$statement->execute();
 	$statement->closeCursor();
 }
+
+function get_degree_Ncompleted($edu_id){
+	global $db;
+	$query = "SELECT * FROM degreecourses
+			  WHERE degreecourses.eduID = :edu_id AND completed = 'N'
+			  ORDER BY courseID";
+	$statement = $db->prepare($query);
+	$statement->bindvalue(":edu_id", $edu_id);
+	$statement->execute();
+	$degreeNcompleted = $statement->fetchAll();
+	$statement->closeCursor();
+	return $degreeNcompleted;
+}
+
+function get_diploma_Ncompleted($edu_id){
+	global $db;
+	$query = "SELECT * FROM diplomacourses
+			  WHERE diplomacourses.eduID = :edu_id AND completed = 'N'
+			  ORDER BY courseID";
+	$statement = $db->prepare($query);
+	$statement->bindvalue(":edu_id", $edu_id);
+	$statement->execute();
+	$diplomaNcompleted = $statement->fetchAll();
+	$statement->closeCursor();
+	return $diplomaNcompleted;
+}
+
 ?>
