@@ -1,5 +1,5 @@
 # MAP-Project-INFO3150
-Team 7. Creating MAP for students and professors taking CSIT.
+Creating a My Action Plan using PHP for students and professors taking CSIT.
 This web application focuses the functionality for students. Prompting them to login and then pulling their information from the database. Users are also able to make comments about courses that will displayed on the comments page. 
 
 
